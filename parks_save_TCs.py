@@ -29,7 +29,6 @@ import resource_bifiltration as RB
 ###################### SET PARAMS FOR PARTICULAR RUN ######################
 thresh_type = 'count'
 len_thresh = 1000
-postmergetype = ''
 
 ##################################################################
 path_to_files = 'geographic_data/'
@@ -47,7 +46,6 @@ rs = np.arange(2000, 999, -200)
 
 score_col = 'acres'
 
-
 all_params = {
             'rs': rs, 
             'qs': qs, 
@@ -57,8 +55,7 @@ all_params = {
             }
                 
 
-fileextra = f'_{thresh_type}_{str(len_thresh).replace('.', 'p')}_{postmergetype}'
-
+fileextra = f'_{thresh_type}_{str(len_thresh).replace('.', 'p')}'
 
 print('Loading data ...')
 ########## Load in Data ##########
@@ -92,7 +89,7 @@ with open(f'{results_folder}/PARKS_TCC{fileextra}.pkl', 'wb') as file:
     pickle.dump(TCC, file)
 
 # Save params used for this run for reproducibility
-with open(f'{results_folder}/PARKS_{strdate}_PARAMS{fileextra}.pkl', 'wb') as file:
+with open(f'{results_folder}/PARKS_PARAMS{fileextra}.pkl', 'wb') as file:
     pickle.dump(all_params, file)
 
     
@@ -128,6 +125,8 @@ for i, C in enumerate(big_Cs):
 
 all_TCs = merged_TCs+small_TCs
 
+
+
 # save for the purpose of making figs, etc.    
-with open(f'{results_folder}/PARKS_TCC_postmerge{fileextra}.pkl', 'wb') as file:
+with open(f'{results_folder}/PARKS_post_initial_merge{fileextra}.pkl', 'wb') as file:
     pickle.dump(all_TCs, file)
