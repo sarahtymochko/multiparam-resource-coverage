@@ -19,7 +19,7 @@ from shapely.strtree import STRtree
 # import gudhi.wasserstein as gudhiwass
 # import gudhi_wasserstein_distance as gudhim
 # from gudhi.representations.vector_methods import BettiCurve
-import resource_bifiltration_v3 as RB
+import resource_bifiltration as RB
 
 
 
@@ -407,3 +407,25 @@ def union_find(G):
   block_list = [block_list[i] for i in range(len(block_list)) if i not in bad]
   #block_list = [find_desc(i,parent) for i in tqdm(generators)]
   return birth,death,generators,block_list
+
+def merge_dicts_v2(*dicts):
+    merged = {}
+    all_keys = set().union(*dicts)
+    
+    for key in all_keys:
+        values = [d[key] for d in dicts if key in d]
+        merged[key] = set().union(*values)
+    
+    return merged
+
+def jaccard_similarity_matrix(list_of_sets):
+    n = len(list_of_sets)
+    matrix = np.zeros((n, n))
+    
+    for i in range(n):
+        for j in range(n):
+            intersection = len(list_of_sets[i] & list_of_sets[j])
+            union = len(list_of_sets[i] | list_of_sets[j])
+            matrix[i, j] = intersection / union if union > 0 else 0
+    
+    return matrix

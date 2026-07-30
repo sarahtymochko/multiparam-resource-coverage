@@ -125,13 +125,8 @@ for i, C in enumerate(big_Cs):
     merged_TCs.append(merged_TC)
     # print("------------------------------------\n")
 
-if postmergetype == 'similar':
-    all_TCs = RB.postprocess_merge_similar(merged_TCs + small_TCs)
-elif postmergetype == 'containment':
-    all_TCs = RB.postprocess_merge(merged_TCs + small_TCs)
-else:
-    all_TCs = merged_TCs+small_TCs
 
+all_TCs = merged_TCs+small_TCs
 
 # save for the purpose of making figs, etc.    
 with open(f'{results_folder}/PARKS_TCC_postmerge{fileextra}.pkl', 'wb') as file:
